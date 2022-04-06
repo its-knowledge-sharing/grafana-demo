@@ -12,7 +12,7 @@ env:
 jobs:
 
   build-and-deploy:    
-    runs-on: self-hosted
+    runs-on: self-hosted #This repository need to be private, otherwise runner will not pick the job (security reason)
 
     steps:
     - name: Checkout repo
