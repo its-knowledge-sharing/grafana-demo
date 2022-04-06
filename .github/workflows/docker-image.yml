@@ -6,7 +6,7 @@ on:
     tags: ['v*.*.*']
 
 env:
-  ENV_GCR_IMAGE: gcr.io/its-artifact-commons/grafana-loki-syslog
+  ENV_GCR_IMAGE: gcr.io/its-artifact-commons/grafana-demo
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
         GCR_IMAGE=$ENV_GCR_IMAGE
         VERSION=latest
         GIT_HASH=$(git rev-parse --short "$GITHUB_SHA")
-        SERVICE_NAME=grafana-loki-syslog
+        SERVICE_NAME=grafana-demo
 
         if [[ $GITHUB_REF == refs/tags/* ]]; then
           VERSION=${GITHUB_REF#refs/tags/}
