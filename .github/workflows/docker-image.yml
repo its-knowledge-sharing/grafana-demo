@@ -49,7 +49,8 @@ jobs:
         echo ::set-output name=gcr_tags::${GCR_TAGS}
         echo ::set-output name=version::${VERSION}
 
-    - name: Set up QEMU
+    - name: Test running script
       id: test2
       run: |
         docker ps
+        docker build . Dockerfile
