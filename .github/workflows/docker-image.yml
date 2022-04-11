@@ -1,4 +1,4 @@
-name: Grafana Loki SysLog
+name: Grafana Demo
 
 on:
   push:
@@ -24,26 +24,24 @@ jobs:
         export PATH="/utils:/scripts:${PATH}" # TODO : Move this to docker image
         run-prepare.bash
         run-docker-push.bash ${GCR_IMAGE} $(pwd)
-      #TODO : Transfer state between jobs
+    
+    #Transfer state between jobs
+    - uses: actions/upload-artifact@master
+      with:
+        name: state
+        path: states.txt
 
-  deploy-nonprod:
+  deploy:
     runs-on: self-hosted
-    if: contains('refs/heads/develop', github.ref)
+    if: contains('refs/heads/develop|refs/heads/main', github.ref)
     needs: build
     steps:
-    - name: Deploy Application      
-      id: deploy-application
-      run: |
-        export PATH="/utils:/scripts:${PATH}"
-        run-prepare.bash
-        run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
+    - uses: actions/download-artifact@master
+      with:
+        name: state
+        path: states.txt
 
-  deploy-prod:
-    runs-on: self-hosted
-    if: contains('refs/heads/main', github.ref)
-    needs: build
-    steps:
-    - name: Deploy Application      
+    - name: Deploy Application
       id: deploy-application
       run: |
         export PATH="/utils:/scripts:${PATH}"
