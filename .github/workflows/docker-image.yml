@@ -21,8 +21,8 @@ jobs:
     - name: Test running script
       id: test2
       run: |
-        echo "GITHUB_REF=[${$GITHUB_REF}]"
-        
+        echo "GITHUB_REF=[${GITHUB_REF}]"
+
         export PATH="/utils:/scripts:${PATH}"
         run-prepare.bash
         run-docker-push.bash asia.gcr.io/evermed-devops-prod/devops/edh-grafana $(pwd)
