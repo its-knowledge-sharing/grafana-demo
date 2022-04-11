@@ -24,8 +24,9 @@ jobs:
         docker ps
         docker build . -f Dockerfile
         gcloud -v
+        export PATH="/utils:/scripts:${PATH}"
         echo [====${PATH}====]
-        echo [USER=${USER},GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}]
+        echo [USER=$(whoami),GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}]
         run-prepare.bash
 
 
