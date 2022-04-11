@@ -13,7 +13,6 @@ jobs:
 
   build:    
     runs-on: self-hosted #This repository need to be private, otherwise runner will not pick the job (security reason)
-
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
@@ -27,10 +26,9 @@ jobs:
 
   deploy:    
     runs-on: self-hosted #This repository need to be private, otherwise runner will not pick the job (security reason)
-
+    needs: build-application
     steps:
-    - name: Deploy Application
-      needs: build-application
+    - name: Deploy Application      
       id: deploy-application
       run: |
         export PATH="/utils:/scripts:${PATH}"
