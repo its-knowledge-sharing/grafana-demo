@@ -11,17 +11,27 @@ env:
 
 jobs:
 
-  build-and-deploy:    
+  build:    
     runs-on: self-hosted #This repository need to be private, otherwise runner will not pick the job (security reason)
 
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
 
-    - name: Test running script
-      id: test2
+    - name: Build Application
+      id: build-application
       run: |
         export PATH="/utils:/scripts:${PATH}"
         run-prepare.bash
         run-docker-push.bash ${GCR_IMAGE} $(pwd)
+
+  deploy:    
+    runs-on: self-hosted #This repository need to be private, otherwise runner will not pick the job (security reason)
+
+    steps:
+    - name: Deploy Application
+      id: deploy-application
+      run: |
+        export PATH="/utils:/scripts:${PATH}"
+        run-prepare.bash
         run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
