@@ -41,7 +41,7 @@ jobs:
     - uses: actions/download-artifact@master
       with:
         name: state
-        path: states.txt
+        path: ./states.txt
 
     - name: Deploy Application
       id: deploy-application
