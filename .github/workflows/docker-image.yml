@@ -25,7 +25,7 @@ jobs:
         docker build . -f Dockerfile
         gcloud -v
         echo [====${PATH}====]
-        echo [USER=${USER}]
+        echo [USER=${USER},GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}]
         run-prepare.bash
 
 
