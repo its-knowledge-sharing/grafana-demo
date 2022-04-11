@@ -53,4 +53,4 @@ jobs:
       id: test2
       run: |
         docker ps
-        docker build . Dockerfile
+        docker build . -f Dockerfile
