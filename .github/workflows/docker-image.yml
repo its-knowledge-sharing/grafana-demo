@@ -24,6 +24,8 @@ jobs:
         export PATH="/utils:/scripts:${PATH}" # TODO : Move this to docker image
         run-prepare.bash
         run-docker-push.bash ${GCR_IMAGE} $(pwd)
+        ls -lrt states.txt
+        cat states.txt
     
     #Transfer state between jobs
     - uses: actions/upload-artifact@master
@@ -44,6 +46,8 @@ jobs:
     - name: Deploy Application
       id: deploy-application
       run: |
+        ls -lrt states.txt
+        cat states.txt
         export PATH="/utils:/scripts:${PATH}"
         run-prepare.bash
         run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
