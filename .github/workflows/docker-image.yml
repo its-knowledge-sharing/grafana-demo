@@ -24,4 +24,6 @@ jobs:
         docker ps
         docker build . -f Dockerfile
         gcloud -v
+        run-prepare.bash
+
 
