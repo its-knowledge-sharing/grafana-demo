@@ -24,6 +24,8 @@ jobs:
         docker ps
         docker build . -f Dockerfile
         gcloud -v
+        echo [====${PATH}====]
+        echo [USER=${USER}]
         run-prepare.bash
 
 
