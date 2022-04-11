@@ -30,6 +30,7 @@ jobs:
 
     steps:
     - name: Deploy Application
+      needs: build-application
       id: deploy-application
       run: |
         export PATH="/utils:/scripts:${PATH}"
