@@ -21,12 +21,6 @@ jobs:
     - name: Test running script
       id: test2
       run: |
-        docker ps
-        docker build . -f Dockerfile
-        gcloud -v
         export PATH="/utils:/scripts:${PATH}"
-        echo [====${PATH}====]
-        echo [USER=$(whoami),GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}]
         run-prepare.bash
-
-
+        run-docker-push asia.gcr.io/evermed-devops-prod/devops/edh-grafana $(pwd)
