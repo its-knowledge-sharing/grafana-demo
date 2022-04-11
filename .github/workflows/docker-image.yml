@@ -6,8 +6,8 @@ on:
     tags: ['v*.*.*']
 
 env:
-  ENV_GCR_IMAGE: gcr.io/its-artifact-commons/grafana-demo
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GCR_IMAGE: asia.gcr.io/evermed-devops-prod/devops/grafana-demo
+  GIT_DEPLOY: its-knowledge-sharing/grafana-demo-deployment.git
 
 jobs:
 
@@ -21,8 +21,7 @@ jobs:
     - name: Test running script
       id: test2
       run: |
-        echo "GITHUB_REF=[${GITHUB_REF}]"
-
         export PATH="/utils:/scripts:${PATH}"
         run-prepare.bash
-        run-docker-push.bash asia.gcr.io/evermed-devops-prod/devops/edh-grafana $(pwd)
+        run-docker-push.bash ${GCR_IMAGE} $(pwd)
+        run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
