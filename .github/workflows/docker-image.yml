@@ -23,4 +23,4 @@ jobs:
       run: |
         export PATH="/utils:/scripts:${PATH}"
         run-prepare.bash
-        run-docker-push asia.gcr.io/evermed-devops-prod/devops/edh-grafana $(pwd)
+        run-docker-push.bash asia.gcr.io/evermed-devops-prod/devops/edh-grafana $(pwd)
