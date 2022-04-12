@@ -8,8 +8,6 @@ on:
 env:
   GCR_IMAGE: asia.gcr.io/evermed-devops-prod/devops/grafana-demo
   GIT_DEPLOY: its-knowledge-sharing/grafana-demo-deployment.git
-  STATE_FILE: states.txt
-  STATE_KEY: state-key
 
 jobs:
 
@@ -30,8 +28,8 @@ jobs:
     #Transfer state between jobs
     - uses: actions/upload-artifact@v3
       with:
-        name: ${STATE_KEY}
-        path: ${STATE_FILE}
+        name: state-key
+        path: states.txt
 
   deploy:
     runs-on: self-hosted
@@ -40,7 +38,7 @@ jobs:
     steps:
     - uses: actions/download-artifact@v3
       with:
-        name: ${STATE_KEY}
+        name: state-key
 
     - name: Deploy Application
       id: deploy-application
