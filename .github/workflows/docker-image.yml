@@ -29,7 +29,7 @@ jobs:
         cat states.txt
     
     #Transfer state between jobs
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v3
       with:
         name: key
         path: states.txt
@@ -39,16 +39,16 @@ jobs:
     if: contains('refs/heads/develop|refs/heads/main', github.ref)
     needs: build
     steps:
-    - uses: actions/download-artifact@master
+    - uses: actions/download-artifact@v3
       with:
         name: key
-        path: xxxx/states.txt
+        #path: xxxx/states.txt
 
     - name: Deploy Application
       id: deploy-application
       run: |
-        ls -lrt xxxx/states.txt
-        cat ./xxxx/states.txt
+        ls -lrt states.txt
+        cat states.txt
         export PATH="/utils:/scripts:${PATH}"
         run-prepare.bash
         run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
