@@ -8,6 +8,8 @@ on:
 env:
   GCR_IMAGE: asia.gcr.io/evermed-devops-prod/devops/grafana-demo
   GIT_DEPLOY: its-knowledge-sharing/grafana-demo-deployment.git
+  STATE_FILE: states.txt
+  STATE_KEY: state-key
 
 jobs:
 
@@ -23,16 +25,13 @@ jobs:
       run: |
         export PATH="/utils:/scripts:${PATH}" # TODO : Move this to docker image
         run-prepare.bash
-        #run-docker-push.bash ${GCR_IMAGE} $(pwd)
-        echo "xxxxx=abcde" > states.txt
-        ls -lrt states.txt
-        cat states.txt
+        run-docker-push.bash ${GCR_IMAGE} $(pwd)
     
     #Transfer state between jobs
     - uses: actions/upload-artifact@v3
       with:
-        name: key
-        path: states.txt
+        name: ${STATE_KEY}
+        path: ${STATE_FILE}
 
   deploy:
     runs-on: self-hosted
@@ -41,14 +40,12 @@ jobs:
     steps:
     - uses: actions/download-artifact@v3
       with:
-        name: key
-        #path: xxxx/states.txt
+        name: ${STATE_KEY}
 
     - name: Deploy Application
       id: deploy-application
       run: |
-        ls -lrt states.txt
-        cat states.txt
+        cat ${STATE_FILE}
         export PATH="/utils:/scripts:${PATH}"
         run-prepare.bash
         run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
