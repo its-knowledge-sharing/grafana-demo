@@ -23,15 +23,16 @@ jobs:
       run: |
         export PATH="/utils:/scripts:${PATH}" # TODO : Move this to docker image
         run-prepare.bash
-        run-docker-push.bash ${GCR_IMAGE} $(pwd)
+        #run-docker-push.bash ${GCR_IMAGE} $(pwd)
+        echo "xxxxx=abcde" > states.txt
         ls -lrt states.txt
         cat states.txt
     
     #Transfer state between jobs
     - uses: actions/upload-artifact@master
       with:
-        name: state
-        path: ./states.txt
+        name: key
+        path: states.txt
 
   deploy:
     runs-on: self-hosted
@@ -40,14 +41,14 @@ jobs:
     steps:
     - uses: actions/download-artifact@master
       with:
-        name: state
-        path: ./states.txt
+        name: key
+        path: xxxx/states.txt
 
     - name: Deploy Application
       id: deploy-application
       run: |
-        ls -lrt states.txt
-        cat states.txt
+        ls -lrt xxxx/states.txt
+        cat xxxx/states.txt
         export PATH="/utils:/scripts:${PATH}"
         run-prepare.bash
         run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
