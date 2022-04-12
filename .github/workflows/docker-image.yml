@@ -48,7 +48,7 @@ jobs:
       id: deploy-application
       run: |
         ls -lrt xxxx/states.txt
-        cat xxxx/states.txt
+        cat ./xxxx/states.txt
         export PATH="/utils:/scripts:${PATH}"
         run-prepare.bash
         run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
