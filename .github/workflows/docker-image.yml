@@ -21,7 +21,6 @@ jobs:
     - name: Build Application
       id: build-application
       run: |
-        export PATH="/utils:/scripts:${PATH}" # TODO : Move this to docker image
         run-prepare.bash
         run-docker-push.bash ${GCR_IMAGE} $(pwd)
     
@@ -43,6 +42,5 @@ jobs:
     - name: Deploy Application
       id: deploy-application
       run: |
-        export PATH="/utils:/scripts:${PATH}"
         run-prepare.bash
         run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
