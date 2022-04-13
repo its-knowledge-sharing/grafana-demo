@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: gcr.io/its-artifact-commons/github-runner:v1.1.4
+      options: --user root
     if: contains('refs/heads/develop|refs/heads/main|refs/tags/', github.ref)
     steps:
     - name: Checkout repo
