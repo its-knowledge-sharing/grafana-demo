@@ -17,7 +17,7 @@ jobs:
     #runs-on: self-hosted #This repository need to be private, otherwise runner will not pick the job (security reason)
     runs-on: ubuntu-latest
     container:
-      image: gcr.io/its-artifact-commons/github-runner:develop-3aab173
+      image: gcr.io/its-artifact-commons/github-runner:develop-ce5b5a1
       options: --user root
     if: contains('refs/heads/develop|refs/heads/main|refs/tags/', github.ref)
     steps:
@@ -39,7 +39,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     container:
-      image: gcr.io/its-artifact-commons/github-runner:develop-3aab173
+      image: gcr.io/its-artifact-commons/github-runner:develop-ce5b5a1
       options: --user root
     if: contains('refs/heads/develop|refs/heads/main', github.ref)
     needs: build
