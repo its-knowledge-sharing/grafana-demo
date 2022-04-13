@@ -9,6 +9,7 @@ env:
   GCR_IMAGE: asia.gcr.io/evermed-devops-prod/devops/grafana-demo
   GIT_DEPLOY: its-knowledge-sharing/grafana-demo-deployment.git
   GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
+  GITHUB_TOKEN: ${{ secrets.EVER_PAT_GITHUB_TOKEN }}
 
 jobs:
 
