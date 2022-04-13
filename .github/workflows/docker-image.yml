@@ -12,7 +12,10 @@ env:
 jobs:
 
   build:    
-    runs-on: self-hosted #This repository need to be private, otherwise runner will not pick the job (security reason)
+    #runs-on: self-hosted #This repository need to be private, otherwise runner will not pick the job (security reason)
+    runs-on: ubuntu-latest
+    container:
+      image: gcr.io/its-artifact-commons/github-runner:v1.1.4
     if: contains('refs/heads/develop|refs/heads/main|refs/tags/', github.ref)
     steps:
     - name: Checkout repo
