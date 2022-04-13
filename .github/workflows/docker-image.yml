@@ -18,14 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: gcr.io/its-artifact-commons/github-runner:develop-df18608
-      #options: --user root
     if: contains('refs/heads/develop|refs/heads/main|refs/tags/', github.ref)
     steps:
-
-    - name: Set Git safe directory
-      run: |
-        git config --global --add safe.directory ${GITHUB_WORKSPACE}
-
     - name: Checkout repo
       uses: actions/checkout@v2
 
@@ -45,7 +39,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: gcr.io/its-artifact-commons/github-runner:develop-df18608
-      #options: --user root
     if: contains('refs/heads/develop|refs/heads/main', github.ref)
     needs: build
     steps:
@@ -57,5 +50,5 @@ jobs:
       id: deploy-application
       run: |
         run-prepare.bash
-        helm gcs init gs://evermed-devops-helm-charts/helm-k8s-extensions
+        #helm gcs init gs://evermed-devops-helm-charts/helm-k8s-extensions
         run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
