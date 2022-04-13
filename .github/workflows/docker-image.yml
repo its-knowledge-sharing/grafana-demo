@@ -51,6 +51,7 @@ jobs:
     - name: Deploy Application
       id: deploy-application
       run: |
+        git config --global --add safe.directory $(pwd)
         run-prepare.bash
         helm gcs init gs://evermed-devops-helm-charts/helm-k8s-extensions
         run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
