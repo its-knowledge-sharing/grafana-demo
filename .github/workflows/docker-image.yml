@@ -21,10 +21,13 @@ jobs:
       #options: --user root
     if: contains('refs/heads/develop|refs/heads/main|refs/tags/', github.ref)
     steps:
+
+    - name: Set Git safe directory
+      run: |
+        git config --global --add safe.directory ${GITHUB_WORKSPACE}
+
     - name: Checkout repo
       uses: actions/checkout@v2
-      run: |
-        git config --global --add safe.directory $(pwd)
 
     - name: Build Application
       id: build-application
