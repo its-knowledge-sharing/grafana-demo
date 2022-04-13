@@ -4,4 +4,3 @@ USER grafana
 RUN echo $(date) > /tmp/date.txt
 
 
-
