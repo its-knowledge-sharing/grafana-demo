@@ -27,7 +27,7 @@ jobs:
       id: build-application
       run: |
         mkdir -p /gcloud/secret/
-        echo ${GOOGLE_APPLICATION_CREDENTIALS_JSON} | base64 -d > /gcloud/secret/key.json
+        echo "${GOOGLE_APPLICATION_CREDENTIALS_JSON}" | base64 -d > /gcloud/secret/key.json
         #echo ${GOOGLE_APPLICATION_CREDENTIALS}
         #cat key.json
         run-prepare.bash
