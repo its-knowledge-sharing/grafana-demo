@@ -26,9 +26,9 @@ jobs:
     - name: Build Application
       id: build-application
       run: |
-        echo ${GOOGLE_APPLICATION_CREDENTIALS_JSON} > key.json
-        echo ${GOOGLE_APPLICATION_CREDENTIALS}
-        cat key.json
+        echo ${GOOGLE_APPLICATION_CREDENTIALS_JSON} > /gcloud/secret/key.json
+        #echo ${GOOGLE_APPLICATION_CREDENTIALS}
+        #cat key.json
         run-prepare.bash
         run-docker-push.bash ${GCR_IMAGE} $(pwd)
     
