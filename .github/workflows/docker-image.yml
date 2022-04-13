@@ -14,7 +14,6 @@ env:
 jobs:
 
   build:    
-    #runs-on: self-hosted #This repository need to be private, otherwise runner will not pick the job (security reason)
     runs-on: ubuntu-latest
     container:
       image: gcr.io/its-artifact-commons/github-runner:develop-595f057
@@ -29,7 +28,7 @@ jobs:
         run-prepare.bash
         run-docker-push.bash ${GCR_IMAGE} $(pwd)
     
-    #Transfer state between jobs
+    #Transfer states between jobs
     - uses: actions/upload-artifact@v3
       with:
         name: state-key
@@ -50,5 +49,4 @@ jobs:
       id: deploy-application
       run: |
         run-prepare.bash
-        #helm gcs init gs://evermed-devops-helm-charts/helm-k8s-extensions
         run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
