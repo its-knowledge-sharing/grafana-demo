@@ -25,6 +25,8 @@ jobs:
     - name: Build Application
       id: build-application
       run: |
+        cat ${GOOGLE_APPLICATION_CREDENTIALS_JSON} > key.json
+        cat key.json
         run-prepare.bash
         run-docker-push.bash ${GCR_IMAGE} $(pwd)
     
@@ -35,7 +37,7 @@ jobs:
         path: states.txt
 
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: contains('refs/heads/develop|refs/heads/main', github.ref)
     needs: build
     steps:
