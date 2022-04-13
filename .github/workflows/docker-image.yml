@@ -13,10 +13,10 @@ env:
 
 jobs:
 
-  build:    
+  build:
     runs-on: ubuntu-latest
     container:
-      image: gcr.io/its-artifact-commons/github-runner:develop-latest
+      image: gcr.io/its-artifact-commons/github-runner:latest
     if: contains('refs/heads/develop|refs/heads/main|refs/tags/', github.ref)
     steps:
     - name: Checkout repo
@@ -37,7 +37,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     container:
-      image: gcr.io/its-artifact-commons/github-runner:develop-latest
+      image: gcr.io/its-artifact-commons/github-runner:latest
     if: contains('refs/heads/develop|refs/heads/main', github.ref)
     needs: build
     steps:
