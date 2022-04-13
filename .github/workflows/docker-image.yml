@@ -8,11 +8,15 @@ on:
 env:
   GCR_IMAGE: asia.gcr.io/evermed-devops-prod/devops/grafana-demo
   GIT_DEPLOY: its-knowledge-sharing/grafana-demo-deployment.git
+  GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
+  GITHUB_TOKEN: ${{ secrets.EVER_PAT_GITHUB_TOKEN }}
 
 jobs:
 
-  build:    
-    runs-on: self-hosted #This repository need to be private, otherwise runner will not pick the job (security reason)
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: gcr.io/its-artifact-commons/github-runner:latest
     if: contains('refs/heads/develop|refs/heads/main|refs/tags/', github.ref)
     steps:
     - name: Checkout repo
@@ -24,14 +28,16 @@ jobs:
         run-prepare.bash
         run-docker-push.bash ${GCR_IMAGE} $(pwd)
     
-    #Transfer state between jobs
+    #Transfer states between jobs
     - uses: actions/upload-artifact@v3
       with:
         name: state-key
         path: states.txt
 
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    container:
+      image: gcr.io/its-artifact-commons/github-runner:latest
     if: contains('refs/heads/develop|refs/heads/main', github.ref)
     needs: build
     steps:
