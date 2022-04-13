@@ -52,4 +52,5 @@ jobs:
       id: deploy-application
       run: |
         run-prepare.bash
+        helm gcs init gs://evermed-devops-helm-charts/helm-k8s-extensions
         run-deployment.bash ${GIT_DEPLOY} AUTO DIRECT
