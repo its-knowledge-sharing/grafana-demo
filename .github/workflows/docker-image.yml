@@ -26,6 +26,7 @@ jobs:
     - name: Build Application
       id: build-application
       run: |
+        mkdir -p /gcloud/secret/
         echo ${GOOGLE_APPLICATION_CREDENTIALS_JSON} > /gcloud/secret/key.json
         #echo ${GOOGLE_APPLICATION_CREDENTIALS}
         #cat key.json
