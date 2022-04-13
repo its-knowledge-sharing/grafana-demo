@@ -42,7 +42,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     container:
-      image: gcr.io/its-artifact-commons/github-runner:v1.1.4
+      image: gcr.io/its-artifact-commons/github-runner:develop-0e1b66d
       options: --user root    
     if: contains('refs/heads/develop|refs/heads/main', github.ref)
     needs: build
